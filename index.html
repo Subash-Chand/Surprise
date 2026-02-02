@@ -5,426 +5,143 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Love Confirmation ❤️</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#ff6b9d,#ff8fab,#ffb8d9);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:Arial Rounded MT Bold,Arial,sans-serif;
+    overflow:hidden;
 }
 
-body {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #ff6b9d, #ff8fab, #ffb8d9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
-    overflow: hidden;
-    position: relative;
+/* particles */
+.particles{position:fixed;width:100%;height:100%;pointer-events:none}
+.particle{
+    position:absolute;
+    width:8px;height:8px;
+    background:rgba(255,255,255,.6);
+    border-radius:50%;
+    animation:float 8s linear infinite;
+}
+@keyframes float{
+    0%{transform:translateY(100vh);opacity:0}
+    10%,90%{opacity:1}
+    100%{transform:translateY(-100px);opacity:0}
 }
 
-/* Interactive Particles */
-.particles {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
+/* container */
+.container{
+    background:rgba(255,255,255,.95);
+    border-radius:25px;
+    padding:35px;
+    width:90%;
+    max-width:550px;
+    text-align:center;
+    box-shadow:0 25px 50px rgba(255,77,109,.3);
+    position:relative;
+    z-index:2;
 }
 
-.particle {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background: rgba(255, 255, 255, 0.6);
-    border-radius: 50%;
-    animation: particleFloat 8s infinite linear;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+/* image */
+.image-display{
+    width:240px;height:240px;
+    margin:0 auto 20px;
+    border-radius:20px;
+    overflow:hidden;
+    border:6px solid #ff4d6d;
+}
+.image-display img{width:100%;height:100%;object-fit:cover}
+
+/* text */
+.question{
+    color:#ff4d6d;
+    font-size:2.3rem;
+    margin-bottom:20px;
 }
 
-@keyframes particleFloat {
-    0% {
-        transform: translateY(100vh) rotate(0deg);
-        opacity: 0;
-    }
-    10% {
-        opacity: 1;
-    }
-    90% {
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(-100px) rotate(360deg);
-        opacity: 0;
-    }
+/* buttons */
+.buttons-container{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    flex-wrap:wrap;
 }
 
-/* Main Container */
-.container {
-    background: rgba(255, 255, 255, 0.92);
-    border-radius: 25px;
-    padding: 40px;
-    width: 90%;
-    max-width: 550px;
-    text-align: center;
-    box-shadow: 
-        0 25px 50px rgba(255, 77, 109, 0.3),
-        0 15px 35px rgba(0, 0, 0, 0.1),
-        inset 0 0 0 2px rgba(255, 255, 255, 0.8);
-    position: relative;
-    z-index: 2;
-    backdrop-filter: blur(15px);
-    border: 5px solid white;
-    overflow: hidden;
-    animation: containerFloat 4s ease-in-out infinite alternate;
+.interactive-btn{
+    padding:14px 36px;
+    font-size:1.2rem;
+    border:none;
+    border-radius:15px;
+    cursor:pointer;
+    font-weight:bold;
+    box-shadow:0 10px 20px rgba(0,0,0,.2);
+    transition:transform .2s;
 }
 
-@keyframes containerFloat {
-    0% { transform: translateY(0px); }
-    100% { transform: translateY(-15px); }
+#yesBtn{
+    background:linear-gradient(135deg,#ff4d6d,#ff8fa3);
+    color:#fff;
+}
+#yesBtn:hover{transform:scale(1.08)}
+
+#noBtn{
+    background:linear-gradient(135deg,#6c757d,#adb5bd);
+    color:#fff;
+    position:fixed;
 }
 
-/* Image Display */
-.image-display {
-    position: relative;
-    margin: 0 auto 30px;
-    width: 280px;
-    height: 280px;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 
-        0 20px 40px rgba(255, 77, 109, 0.3),
-        0 10px 25px rgba(0, 0, 0, 0.2);
-    border: 6px solid #ff4d6d;
-    transform-style: preserve-3d;
-    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    animation: imagePulse 3s infinite alternate;
+/* counter */
+.counter{
+    position:absolute;
+    bottom:15px;
+    right:15px;
+    background:#ff4d6d;
+    color:white;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:.85rem;
 }
 
-@keyframes imagePulse {
-    0% { 
-        box-shadow: 
-            0 20px 40px rgba(255, 77, 109, 0.3),
-            0 10px 25px rgba(0, 0, 0, 0.2),
-            inset 0 0 30px rgba(255, 77, 109, 0.2);
-    }
-    100% { 
-        box-shadow: 
-            0 20px 40px rgba(255, 77, 109, 0.5),
-            0 10px 25px rgba(0, 0, 0, 0.3),
-            inset 0 0 60px rgba(255, 77, 109, 0.4);
-    }
+/* pages */
+.success-screen,.letter-screen{display:none}
+
+/* letter */
+.letter{
+    font-size:1.15rem;
+    color:#555;
+    line-height:1.7;
+    white-space:pre-line;
 }
 
-.image-display:hover {
-    transform: perspective(1000px) rotateY(10deg) rotateX(5deg);
-    animation-play-state: paused;
+/* footer */
+.footer{
+    margin-top:20px;
+    font-size:.9rem;
+    color:#ff4d6d;
+    font-weight:bold;
 }
 
-.image-display img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s ease;
+/* hearts */
+.heart{
+    position:fixed;
+    font-size:1.5rem;
+    animation:rise 4s linear forwards;
+}
+@keyframes rise{
+    0%{transform:translateY(0);opacity:1}
+    100%{transform:translateY(-100vh);opacity:0}
 }
 
-.image-display:hover img {
-    transform: scale(1.1);
-}
-
-.image-frame {
-    position: absolute;
-    top: -15px;
-    left: -15px;
-    right: -15px;
-    bottom: -15px;
-    border: 4px dashed #ff8fa3;
-    border-radius: 25px;
-    pointer-events: none;
-    z-index: 2;
-    animation: frameRotate 20s linear infinite;
-}
-
-@keyframes frameRotate {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Question Text */
-.question {
-    color: #ff4d6d;
-    font-size: 2.8rem;
-    margin-bottom: 35px;
-    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
-    position: relative;
-    display: inline-block;
-    padding: 0 20px;
-}
-
-.question::before,
-.question::after {
-    content: '✨';
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.5rem;
-    animation: sparkle 1.5s infinite alternate;
-}
-
-.question::before {
-    left: -20px;
-}
-
-.question::after {
-    right: -20px;
-}
-
-@keyframes sparkle {
-    0% { opacity: 0.5; transform: translateY(-50%) scale(0.8); }
-    100% { opacity: 1; transform: translateY(-50%) scale(1.2); }
-}
-
-/* Buttons Container */
-.buttons-container {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin-top: 30px;
-    position: relative;
-    min-height: 90px;
-    background: linear-gradient(135deg, rgba(255, 240, 245, 0.7), rgba(255, 230, 236, 0.9));
-    padding: 25px;
-    border-radius: 20px;
-    border: 3px dashed #ffb8d9;
-    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5);
-}
-
-/* Button Styles */
-.interactive-btn {
-    padding: 18px 45px;
-    font-size: 1.4rem;
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    position: relative;
-    min-width: 180px;
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    overflow: hidden;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-.interactive-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-    transition: 0.5s;
-}
-
-.interactive-btn:hover::before {
-    left: 100%;
-}
-
-/* Yes Button */
-#yesBtn {
-    background: linear-gradient(135deg, #ff4d6d, #ff6b9d, #ff8fa3);
-    color: white;
-    z-index: 3;
-    border-bottom: 6px solid #d92b4c;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-}
-
-#yesBtn:hover {
-    transform: translateY(-8px) scale(1.05);
-    box-shadow: 
-        0 20px 40px rgba(255, 77, 109, 0.4),
-        0 10px 20px rgba(0, 0, 0, 0.25);
-    animation: yesGlow 0.5s infinite alternate;
-}
-
-@keyframes yesGlow {
-    0% { 
-        box-shadow: 
-            0 20px 40px rgba(255, 77, 109, 0.4),
-            0 10px 20px rgba(0, 0, 0, 0.25);
-    }
-    100% { 
-        box-shadow: 
-            0 20px 40px rgba(255, 77, 109, 0.6),
-            0 10px 20px rgba(0, 0, 0, 0.3),
-            0 0 30px rgba(255, 255, 255, 0.5);
-    }
-}
-
-/* No Button */
-#noBtn {
-    background: linear-gradient(135deg, #6c757d, #868e96, #adb5bd);
-    color: white;
-    position: absolute;
-    z-index: 2;
-    border-bottom: 6px solid #495057;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-#noBtn:hover {
-    transform: scale(1.08) rotate(5deg);
-    background: linear-gradient(135deg, #5a6268, #727b84, #959ca4);
-}
-
-/* Success Screen */
-.success-screen {
-    display: none;
-    animation: fadeInScale 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-}
-
-@keyframes fadeInScale {
-    0% {
-        opacity: 0;
-        transform: scale(0.8);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-/* Celebration Effects */
-.celebration {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-    display: none;
-}
-
-.celebration.active {
-    display: block;
-}
-
-.firework {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background: #ff4d6d;
-    border-radius: 50%;
-    animation: fireworkExplode 1.5s forwards;
-    box-shadow: 0 0 20px currentColor;
-}
-
-@keyframes fireworkExplode {
-    0% {
-        transform: translateY(100vh) scale(1);
-        opacity: 1;
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(var(--y)) scale(20);
-        opacity: 0;
-    }
-}
-
-.heart-burst {
-    position: absolute;
-    font-size: 2rem;
-    animation: heartBurst 2s forwards;
-    z-index: 3;
-}
-
-@keyframes heartBurst {
-    0% {
-        transform: scale(0) rotate(0deg);
-        opacity: 1;
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        transform: scale(2) rotate(360deg);
-        opacity: 0;
-    }
-}
-
-/* Counter */
-.counter {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    background: linear-gradient(135deg, #ff4d6d, #ff8fa3);
-    color: white;
-    padding: 10px 20px;
-    border-radius: 25px;
-    font-size: 1rem;
-    font-weight: bold;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    z-index: 3;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .container {
-        padding: 30px 25px;
-        width: 95%;
-    }
-    
-    .image-display {
-        width: 240px;
-        height: 240px;
-    }
-    
-    .question {
-        font-size: 2.2rem;
-    }
-    
-    .buttons-container {
-        flex-direction: column;
-        align-items: center;
-        gap: 25px;
-        min-height: auto;
-    }
-    
-    .interactive-btn {
-        padding: 16px 35px;
-        font-size: 1.2rem;
-        min-width: 160px;
-    }
-    
-    #noBtn {
-        position: relative;
-    }
-}
-
-@media (max-width: 480px) {
-    .image-display {
-        width: 200px;
-        height: 200px;
-    }
-    
-    .question {
-        font-size: 1.9rem;
-    }
-    
-    .interactive-btn {
-        padding: 14px 30px;
-        font-size: 1.1rem;
-        min-width: 140px;
-    }
+/* mobile */
+@media(max-width:480px){
+    .question{font-size:1.9rem}
+    .image-display{width:200px;height:200px}
+    .interactive-btn{width:100%}
 }
 </style>
 </head>
@@ -432,335 +149,149 @@ body {
 <body>
 
 <div class="particles" id="particles"></div>
-<div class="celebration" id="celebration"></div>
 
 <div class="container">
-    <div id="askScreen">
-        <div class="image-display">
-            <img src="pic1.png" alt="Love" id="mainImage">
-            <div class="image-frame"></div>
-        </div>
-        
-        <h1 class="question" id="question">Do you love me? 🥺</h1>
-        
-        <div class="buttons-container" id="buttonsBox">
-            <button class="interactive-btn" id="yesBtn">
-                <i class="fas fa-heart"></i> YES ❤️
-            </button>
-            <button class="interactive-btn" id="noBtn">
-                <i class="fas fa-running"></i> NO 😶
-            </button>
-        </div>
-        
-        <div class="counter" id="counter">
-            <i class="fas fa-crosshairs"></i>
-            <span id="attempts">0 tries</span>
-        </div>
+
+<!-- ASK -->
+<div id="askScreen">
+    <div class="image-display">
+        <img src="pic1.png" id="mainImage">
     </div>
-    
-    <div class="success-screen" id="successScreen">
-        <div class="image-display">
-            <img src="pic2.gif" alt="Celebration" id="successImage">
-            <div class="image-frame"></div>
-        </div>
-        
-        <h1 class="question" style="color: #ff4d6d; animation: textGlow 1.5s infinite alternate;">I KNEW IT! 😍</h1>
-        <p style="color: #666; margin: 20px 0 30px; font-size: 1.2rem;">
-            You just made my entire world brighter! 💫
-        </p>
-        
-        <button class="interactive-btn" onclick="location.reload()" 
-                style="background: linear-gradient(135deg, #6a11cb, #2575fc);">
-            <i class="fas fa-redo"></i> TRY AGAIN
-        </button>
+
+    <h1 class="question">Do you love me? 🥺</h1>
+
+    <div class="buttons-container">
+        <button class="interactive-btn" id="yesBtn">YES ❤️</button>
+        <button class="interactive-btn" id="noBtn">NO 😶</button>
+    </div>
+
+    <div class="counter">
+        <span id="attempts">0 tries</span>
     </div>
 </div>
 
+<!-- SUCCESS -->
+<div class="success-screen" id="successScreen">
+    <div class="image-display">
+        <img src="pic2.gif">
+    </div>
+    <h1 class="question">I KNEW IT! 😍❤️</h1>
+    <p>You just made my heart smile 💖</p>
+    <button class="interactive-btn" id="openLetter">Open Letter 💌</button>
+</div>
+
+<!-- LETTER -->
+<div class="letter-screen" id="letterScreen">
+    <h1 class="question">For You ❤️</h1>
+
+    <div class="letter" id="letterText"></div>
+
+    <button class="interactive-btn" style="margin-top:20px"
+            onclick="playAgain()">
+        🔁 Play Again
+    </button>
+
+    <div class="footer">Made by: Subash Chand</div>
+</div>
+
+</div>
+
 <script>
-// Initialize particles
-const particles = document.getElementById('particles');
-for (let i = 0; i < 50; i++) {
-    createParticle();
+/* particles */
+const particles=document.getElementById("particles");
+for(let i=0;i<40;i++){
+    const p=document.createElement("div");
+    p.className="particle";
+    p.style.left=Math.random()*100+"vw";
+    p.style.animationDelay=Math.random()*5+"s";
+    particles.appendChild(p);
 }
 
-function createParticle() {
-    const particle = document.createElement('div');
-    particle.className = 'particle';
-    particle.style.left = Math.random() * 100 + 'vw';
-    particle.style.animationDelay = Math.random() * 5 + 's';
-    particle.style.animationDuration = (5 + Math.random() * 5) + 's';
-    particle.style.backgroundColor = `rgba(255, ${Math.floor(Math.random() * 100 + 100)}, ${Math.floor(Math.random() * 100 + 155)}, 0.7)`;
-    particle.style.boxShadow = `0 0 ${Math.random() * 20 + 10}px rgba(255, 255, 255, 0.8)`;
-    particles.appendChild(particle);
-    
-    setTimeout(() => {
-        particle.remove();
-        createParticle();
-    }, 8000);
-}
+/* elements */
+const noBtn=document.getElementById("noBtn");
+const yesBtn=document.getElementById("yesBtn");
+const counter=document.getElementById("attempts");
+let attempts=0;
 
-// Interactive elements
-const noBtn = document.getElementById('noBtn');
-const yesBtn = document.getElementById('yesBtn');
-const buttonsBox = document.getElementById('buttonsBox');
-const counter = document.getElementById('attempts');
-const celebration = document.getElementById('celebration');
-const question = document.getElementById('question');
-const mainImage = document.getElementById('mainImage');
-
-let attempts = 0;
-let yesClicked = false;
-
-// Messages that change as you try to click NO
-const messages = [
-    "Do you love me? 🥺",
-    "Are you sure? 😢",
-    "Think again! 💔",
-    "Please say yes! 🥹",
-    "My heart is breaking... 💘",
-    "Just one chance? 😘",
-    "You're my everything! 🌹",
-    "Final attempt! 💖",
-    "I won't give up! 💕",
-    "You're amazing! ✨",
-    "Say yes please! 🥰"
-];
-
-// Create click effect
-function createClickEffect(x, y) {
-    const effect = document.createElement('div');
-    effect.style.position = 'fixed';
-    effect.style.left = x + 'px';
-    effect.style.top = y + 'px';
-    effect.style.width = '0';
-    effect.style.height = '0';
-    effect.style.borderRadius = '50%';
-    effect.style.background = 'radial-gradient(circle, rgba(255,77,109,0.4) 0%, rgba(255,77,109,0) 70%)';
-    effect.style.pointerEvents = 'none';
-    effect.style.zIndex = '9999';
-    effect.style.animation = 'ripple 0.6s ease-out';
-    document.body.appendChild(effect);
-    
-    setTimeout(() => effect.remove(), 600);
-}
-
-// Add ripple animation
-const rippleStyle = document.createElement('style');
-rippleStyle.textContent = `
-    @keyframes ripple {
-        0% {
-            width: 0;
-            height: 0;
-            opacity: 1;
-        }
-        100% {
-            width: 200px;
-            height: 200px;
-            opacity: 0;
-        }
-    }
-`;
-document.head.appendChild(rippleStyle);
-
-// Create heart burst
-function createHeartBurst(x, y) {
-    const heart = document.createElement('div');
-    heart.className = 'heart-burst';
-    heart.innerHTML = '❤️';
-    heart.style.left = x + 'px';
-    heart.style.top = y + 'px';
-    heart.style.color = `hsl(${Math.random() * 30 + 330}, 100%, 65%)`;
-    celebration.appendChild(heart);
-    
-    setTimeout(() => heart.remove(), 2000);
-}
-
-// Create fireworks
-function createFireworks() {
-    for (let i = 0; i < 30; i++) {
-        setTimeout(() => {
-            const x = Math.random() * window.innerWidth;
-            const firework = document.createElement('div');
-            firework.className = 'firework';
-            firework.style.left = x + 'px';
-            firework.style.setProperty('--y', (Math.random() * 300 + 100) + 'px');
-            firework.style.color = getRandomColor();
-            firework.style.backgroundColor = getRandomColor();
-            celebration.appendChild(firework);
-            
-            // Create sparks
-            for (let j = 0; j < 12; j++) {
-                setTimeout(() => {
-                    createHeartBurst(x, window.innerHeight);
-                }, j * 50);
-            }
-            
-            setTimeout(() => firework.remove(), 1500);
-        }, i * 300);
-    }
-}
-
-function getRandomColor() {
-    const colors = ['#ff4d6d', '#ff8fa3', '#ffb8d9', '#6a11cb', '#2575fc', '#00b4d8', '#ff9a00'];
-    return colors[Math.floor(Math.random() * colors.length)];
-}
-
-// Move NO button - INTERACTIVE VERSION
-function moveNoButton(event) {
-    if (yesClicked) return;
-    
+/* NO button move */
+function moveNoButton(){
     attempts++;
-    counter.textContent = `${attempts} tries`;
-    
-    // Create click effect
-    const x = event.clientX || event.touches[0].clientX;
-    const y = event.clientY || event.touches[0].clientY;
-    createClickEffect(x, y);
-    
-    // Change question
-    if (attempts <= messages.length) {
-        question.textContent = messages[attempts - 1];
-    }
-    
-    // Get container boundaries
-    const boxRect = buttonsBox.getBoundingClientRect();
-    const btnRect = noBtn.getBoundingClientRect();
-    
-    // Calculate available space
-    const padding = 20;
-    const maxX = boxRect.width - btnRect.width - padding;
-    const maxY = boxRect.height - btnRect.height - padding;
-    
-    // Generate new position - make it move far!
-    let newX, newY;
-    let safety = 0;
-    
-    do {
-        // Move to opposite side of container
-        newX = Math.random() * maxX;
-        newY = Math.random() * maxY;
-        safety++;
-        
-        // Safety break
-        if (safety > 50) break;
-    } while (Math.abs(newX - (boxRect.width/2)) < 100 && 
-             Math.abs(newY - (boxRect.height/2)) < 100);
-    
-    // Apply new position with bounce effect
-    noBtn.style.left = newX + 'px';
-    noBtn.style.top = newY + 'px';
-    
-    // Add shake animation
-    noBtn.style.animation = 'none';
-    setTimeout(() => {
-        noBtn.style.animation = 'shake 0.5s';
-    }, 10);
-    
-    // Add text glow animation to question
-    question.style.animation = 'none';
-    setTimeout(() => {
-        question.style.animation = 'textGlow 0.5s ease-in-out';
-    }, 10);
-    
-    // Prevent default for touch
-    if (event.type === 'touchstart') {
-        event.preventDefault();
+    counter.textContent=attempts+" tries";
+
+    const rect=noBtn.getBoundingClientRect();
+    const pad=20;
+    const maxX=window.innerWidth-rect.width-pad;
+    const maxY=window.innerHeight-rect.height-pad;
+
+    noBtn.style.left=Math.random()*maxX+"px";
+    noBtn.style.top=Math.random()*maxY+"px";
+}
+
+/* events */
+noBtn.addEventListener("mouseenter",moveNoButton);
+noBtn.addEventListener("click",moveNoButton);
+noBtn.addEventListener("touchstart",moveNoButton);
+
+yesBtn.onclick=()=>{
+    document.getElementById("askScreen").style.display="none";
+    document.getElementById("successScreen").style.display="block";
+    hearts();
+};
+
+/* letter */
+document.getElementById("openLetter").onclick=()=>{
+    document.getElementById("successScreen").style.display="none";
+    document.getElementById("letterScreen").style.display="block";
+    typeLetter();
+};
+
+const letterText=`From the moment you came into my life,
+everything slowly started to feel warmer and brighter.
+
+Your smile became my comfort,
+your voice became my favorite sound,
+and your presence became my peace.
+
+This little page can never fully express
+how special you are to me,
+but my heart knows one simple truth —
+it chooses you, every single time ❤️
+
+Thank you for being patient,
+for being kind,
+and for loving me the way you do.
+
+Good night my janu baby Elisha 💕`;
+
+let i=0;
+function typeLetter(){
+    if(i<letterText.length){
+        document.getElementById("letterText").textContent+=letterText.charAt(i);
+        i++;
+        setTimeout(typeLetter,40);
     }
 }
 
-// Add shake animation
-const shakeStyle = document.createElement('style');
-shakeStyle.textContent = `
-    @keyframes shake {
-        0%, 100% { transform: translateX(0) rotate(0deg); }
-        25% { transform: translateX(-10px) rotate(-5deg); }
-        50% { transform: translateX(10px) rotate(5deg); }
-        75% { transform: translateX(-10px) rotate(-5deg); }
-    }
-    
-    @keyframes textGlow {
-        0%, 100% { text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1); }
-        50% { text-shadow: 0 0 20px rgba(255, 77, 109, 0.8), 0 0 30px rgba(255, 77, 109, 0.6); }
-    }
-`;
-document.head.appendChild(shakeStyle);
+/* hearts */
+function hearts(){
+    setInterval(()=>{
+        const h=document.createElement("div");
+        h.className="heart";
+        h.innerHTML="❤️";
+        h.style.left=Math.random()*100+"vw";
+        h.style.bottom="0";
+        document.body.appendChild(h);
+        setTimeout(()=>h.remove(),4000);
+    },500);
+}
 
-// YES button click - CELEBRATION!
-yesBtn.addEventListener('click', function() {
-    if (yesClicked) return;
-    yesClicked = true;
-    
-    // Show celebration
-    celebration.classList.add('active');
-    createFireworks();
-    
-    // Create more particles
-    for (let i = 0; i < 30; i++) {
-        setTimeout(createParticle, i * 100);
-    }
-    
-    // Add text glow to question
-    question.style.animation = 'textGlow 1.5s infinite alternate';
-    
-    // Show success screen after delay
-    setTimeout(() => {
-        document.getElementById('askScreen').style.display = 'none';
-        document.getElementById('successScreen').style.display = 'block';
-    }, 2000);
-});
+/* play again */
+function playAgain(){
+    location.reload();
+}
 
-// Event listeners for NO button
-noBtn.addEventListener('mouseenter', moveNoButton);
-noBtn.addEventListener('click', moveNoButton);
-noBtn.addEventListener('touchstart', function(e) {
-    moveNoButton(e);
-    e.preventDefault();
-});
-
-// Set initial position for NO button
-window.addEventListener('load', function() {
-    setTimeout(() => {
-        const boxRect = buttonsBox.getBoundingClientRect();
-        const btnRect = noBtn.getBoundingClientRect();
-        
-        // Start NO button at the edge
-        const initialX = boxRect.width - btnRect.width - 30;
-        const initialY = 20;
-        
-        noBtn.style.left = initialX + 'px';
-        noBtn.style.top = initialY + 'px';
-    }, 100);
-    
-    // Set image fallbacks
-    mainImage.onerror = function() {
-        this.src = 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&h=400&fit=crop';
-    };
-    
-    document.getElementById('successImage').onerror = function() {
-        this.src = 'https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif';
-    };
-});
-
-// Make sure button stays visible
-window.addEventListener('resize', function() {
-    if (yesClicked) return;
-    
-    const boxRect = buttonsBox.getBoundingClientRect();
-    const btnRect = noBtn.getBoundingClientRect();
-    
-    const currentX = parseInt(noBtn.style.left) || 0;
-    const currentY = parseInt(noBtn.style.top) || 0;
-    
-    // Adjust if button goes off screen
-    const maxX = boxRect.width - btnRect.width - 20;
-    const maxY = boxRect.height - btnRect.height - 20;
-    
-    const newX = Math.min(Math.max(currentX, 0), maxX);
-    const newY = Math.min(Math.max(currentY, 0), maxY);
-    
-    noBtn.style.left = newX + 'px';
-    noBtn.style.top = newY + 'px';
-});
+/* fallback */
+mainImage.onerror=()=>mainImage.src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e";
 </script>
 
 </body>
